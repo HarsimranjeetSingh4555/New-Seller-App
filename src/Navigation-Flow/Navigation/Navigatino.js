@@ -60,6 +60,7 @@ import ListofStudent from '../../screen/WeeklyTest/ListofStudent/ListofStudent';
 import EventSecond from '../../screen/EventsScreen/EventSecond';
 import PaymentGateWay from '../../screen/EventsScreen/PaymentGateWay/PaymentGateWay';
 import ProfileDetails from '../../screen/ProfileDetails/ProfileDetails'
+import MyMatchList from '../../screen/WeeklyTest/MyMatch/MyMatchList';
 
 
 
@@ -155,6 +156,7 @@ const Navigatino = () => {
         <Stack.Screen name="UserRequirement" component={UserRequirement} />
         <Stack.Screen name="WeeklyTest" component={WeeklyTest} />
         <Stack.Screen name="ListofStudent" component={ListofStudent} />
+        <Stack.Screen name="MyMatchList" component={MyMatchList} />
 
         
 

@@ -1,16 +1,16 @@
-import React from 'react'
 import { StyleSheet, Text, View, Image, SafeAreaView, ScrollView, Label, StatusBar, FlatList,
-     TouchableOpacity, TextInput, Pressable, Dimensions } from 'react-native';
+    TouchableOpacity, TextInput, Pressable, Dimensions } from 'react-native';
+import React from 'react'
 
 
 const gustData = [
 
     {
         id: '1',
-        image: require('../EventsScreen/assets/cityimage.png'),
-        fav: require('../EventsScreen/assets/fav.png'),
-        chat: require('../EventsScreen/assets/chat1.png'),
-        share: require('../EventsScreen/assets/share.png'),
+        image: require('../assets/cityimage.png'),
+        fav: require('../assets/fav.png'),
+        chat: require('../assets/chat1.png'),
+        share: require('../assets/share.png'),
         City: 'Moga,Punjab',
         date: '',
         duration: '',
@@ -116,8 +116,8 @@ const GustData = ({ item, navigation }) => {
     )
 }
 
-const EventsScreen = ({ navigation }) => {
 
+const MyEvents = () => {
     return (
         <>
             <StatusBar backgroundColor="#0006C1" barStyle='light-content' />
@@ -126,18 +126,18 @@ const EventsScreen = ({ navigation }) => {
 
                     <View>
                         <View style={styles.mainlogo}>
-                            <Image source={require('../EventsScreen/assets/logo.png')} style={styles.logo} />
+                            <Image source={require('../assets/logo.png')} style={styles.logo} />
                         </View>
 
                         <View style={styles.Name1}>
                             <View style={styles.topmain}>
                                 <View style={styles.topad}>
-                                    <Image source={require('../EventsScreen/assets/book.png')} style={styles.ad} />
+                                    <Image source={require('../assets/book.png')} style={styles.ad} />
                                 </View>
 
                                 <Pressable>
                                     <View style={styles.maintext}>
-                                        <Text style={styles.toptext}>Book Event</Text>
+                                        <Text style={styles.toptext}>My Events</Text>
                                     </View>
                                 </Pressable>
 
@@ -159,7 +159,7 @@ const EventsScreen = ({ navigation }) => {
     )
 }
 
-export default EventsScreen;
+export default MyEvents
 
 const styles = StyleSheet.create({
     container: {

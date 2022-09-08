@@ -113,7 +113,7 @@ const HomeScreen = ({navigation}) => {
                 <Image source={require('../HomeScreen/assets/customer.png')} style={{ width: 50, height: 50 }} />
               </View>
               <View style={{ marginVertical: 15 }}>
-                <Text style={{ fontSize: 30, fontWeight: '900', color: '#0006C1' }}>Your Customer</Text>
+                <Text style={{ fontSize: 30, fontWeight: '900', color: '#0006C1' }}>Your Customers</Text>
               </View>
             </View>
 
@@ -471,7 +471,7 @@ const HomeScreen = ({navigation}) => {
             <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginHorizontal: 7, marginVertical: 10 }}>
 
               <View style={styles.box}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>navigation.navigate('MyMatchList')}>
                   <View style={{ alignSelf: 'center', marginVertical: 20 }}>
                     <Image source={require('../HomeScreen/assets/mymatch.png')} style={{ width: 50, height: 50 }} />
                   </View>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, SafeAreaView, ScrollView, Label, StatusBar, FlatList, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Image, SafeAreaView, ScrollView, Label, StatusBar, FlatList, TouchableOpacity, TextInput, Dimensions } from 'react-native';
 
 
 const gustData = [
@@ -10,7 +10,7 @@ const gustData = [
         fav: require('../../EventsScreen/assets/fav.png'),
         chat: require('../../EventsScreen/assets/chat1.png'),
         share: require('../../EventsScreen/assets/share.png'),
-        City: 'Moga,Punajab',
+        City: 'Moga,Punjab',
         date: '',
         adress: '',
         company: '',
@@ -28,6 +28,13 @@ const GustData = ({ item }) => {
     return (
         <View style={styles.mainList}>
 
+            <TouchableOpacity>
+                <View style={styles.fav}>
+                    <Image source={item.fav} style={{ height: 50, width: 50 }} />
+                </View>
+            </TouchableOpacity>
+
+
             <View style={{ flexDirection: 'row' }}>
 
                 <View style={styles.Pic}>
@@ -38,16 +45,11 @@ const GustData = ({ item }) => {
                     <Text style={{ fontSize: 35, fontWeight: '600', color: '#000' }}>{item.City}</Text>
                 </View>
 
-                <TouchableOpacity>
-                    <View style={styles.fav}>
-                        <Image source={item.fav} style={{ height: 50, width: 50 }} />
-                    </View>
-                </TouchableOpacity>
 
             </View>
 
             <View style={{ marginHorizontal: 10 }}>
-                <View style={{ flexDirection: 'row', marginHorizontal: 10 }}>
+                <View style={styles.mainadress}>
                     <View>
                         <Text style={styles.label} >Event Date: </Text>
                     </View>
@@ -58,7 +60,7 @@ const GustData = ({ item }) => {
                     </View>
                 </View>
 
-                <View style={{ flexDirection: 'row', marginBottom: 10 }}>
+                <View style={styles.mainadress}>
                     <View>
                         <Text style={styles.label} > Event adress: </Text>
                     </View>
@@ -75,7 +77,7 @@ const GustData = ({ item }) => {
             </View>
 
             <View style={styles.adress}>
-                <View style={{ flexDirection: 'row' }}>
+                <View style={styles.mainadress}>
                     <View>
                         <Text style={styles.label} >Company Name: </Text>
                     </View>
@@ -86,7 +88,7 @@ const GustData = ({ item }) => {
                     </View>
                 </View>
 
-                <View style={{ flexDirection: 'row' }}>
+                <View style={styles.mainadress}>
                     <View>
                         <Text style={styles.label} > Adress: </Text>
                     </View>
@@ -100,7 +102,7 @@ const GustData = ({ item }) => {
                     </View>
                 </View>
 
-                <View style={{ flexDirection: 'row' }}>
+                <View style={styles.mainadress}>
                     <View>
                         <Text style={styles.label} > Contact Parson: </Text>
                     </View>
@@ -111,7 +113,7 @@ const GustData = ({ item }) => {
                     </View>
                 </View>
 
-                <View style={{ flexDirection: 'row' }}>
+                <View style={styles.mainadress}>
                     <View>
                         <Text style={styles.label} >Desigation: </Text>
                     </View>
@@ -122,7 +124,7 @@ const GustData = ({ item }) => {
                     </View>
                 </View>
 
-                <View style={{ flexDirection: 'row' }}>
+                <View style={styles.mainadress}>
                     <View>
                         <Text style={styles.label} >Contact No: </Text>
                     </View>
@@ -136,7 +138,7 @@ const GustData = ({ item }) => {
             </View>
 
             <View style={{ marginHorizontal: 10 }}>
-                <View style={{ flexDirection: 'row', marginHorizontal: 10 }}>
+                <View style={styles.mainadress}>
                     <View>
                         <Text style={styles.label} >Size of Stall </Text>
                     </View>
@@ -147,7 +149,7 @@ const GustData = ({ item }) => {
                     </View>
                 </View>
 
-                <View style={{ flexDirection: 'row', marginBottom: 10 }}>
+                <View style={styles.mainadress}>
                     <View>
                         <Text style={styles.label} >Rent of Stall </Text>
                     </View>
@@ -160,10 +162,10 @@ const GustData = ({ item }) => {
                 </View>
             </View>
 
-            <TouchableOpacity onPress={()=>navigation.navigate('j')}>
-            <View style={{ backgroundColor: '#D1070A', width: '30%', padding: 10, marginHorizontal: 10, marginVertical: 10,borderRadius:12 }}>  
-                    <Text style={{color:'#fff',textAlign:'center',fontSize:15}}>Book my Stall</Text>
-            </View>
+            <TouchableOpacity onPress={() => navigation.navigate('')}>
+                <View style={styles.Btn}>
+                    <Text style={styles.btn}>Book my Stall</Text>
+                </View>
             </TouchableOpacity>
 
             <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginRight: 10, marginTop: -45 }}>
@@ -187,7 +189,7 @@ const GustData = ({ item }) => {
     )
 }
 
-const EventSecond = ({navigation}) => {
+const EventSecond = ({ navigation }) => {
 
     return (
         <>
@@ -244,27 +246,20 @@ const styles = StyleSheet.create({
         width: '70%',
         height: 160,
         alignSelf: 'center',
-        marginTop: '10%'
+
     },
     mainList: {
-        height: 670,
+        height: 'auto',
         width: '97%',
         borderWidth: 1,
         marginHorizontal: 7,
-        marginVertical: 5,
+        marginVertical: 20,
         borderRadius: 10
     },
     Name1: {
-        height: 55,
         width: "97%",
-        // borderWidth: 1,
-        marginTop: 10,
-        marginHorizontal: 7,
         borderRadius: 10,
-        borderColor: '#000000',
-        backgroundColor: "#fff",
         alignItems: "center",
-        justifyContent: "center"
     },
     topmain: {
         flexDirection: "row",
@@ -274,10 +269,7 @@ const styles = StyleSheet.create({
         width: 40,
     },
     maintext: {
-        alignItems: "center",
-        justifyContent: "center",
-        marginLeft: 5,
-        // marginRight:25,
+        alignItems: "center"
     },
     toptext: {
         textAlign: "center",
@@ -295,8 +287,11 @@ const styles = StyleSheet.create({
         width: 100
     },
     fav: {
-        marginLeft: 15,
-        marginVertical: 25
+        alignSelf: 'flex-end'
+    },
+    mainadress: {
+        flexDirection: 'row',
+        justifyContent: 'space-evenly'
     },
     adress: {
         borderWidth: 1,
@@ -314,7 +309,7 @@ const styles = StyleSheet.create({
     },
     name: {
         borderBottomWidth: 2,
-        width: 245,
+        width: Dimensions.get('screen').width * 0.50,
         height: 38,
         fontSize: 15,
         fontWeight: '500',
@@ -322,7 +317,7 @@ const styles = StyleSheet.create({
     },
     Adress: {
         borderBottomWidth: 2,
-        width: 300,
+        width: Dimensions.get('screen').width * 0.65,
         height: 38,
         fontSize: 15,
         fontWeight: '500',
@@ -336,4 +331,18 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         paddingHorizontal: 10
     },
+    Btn: {
+        backgroundColor: '#D1070A',
+        width: '30%',
+        padding: 10,
+        marginHorizontal: 10,
+        marginVertical: 10,
+        borderRadius: 12,
+        marginVertical: 20
+    },
+    btn: {
+        color: '#fff',
+        textAlign: 'center',
+        fontSize: 15,
+    }
 })

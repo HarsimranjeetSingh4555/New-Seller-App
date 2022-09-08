@@ -47,6 +47,7 @@ import SellFranchise from './src/screen/Form/SellFranchise/SellFranchise'
 import WeeklyTest from './src/screen/WeeklyTest/WeeklyTest'
 import ListofStudent from './src/screen/WeeklyTest/ListofStudent/ListofStudent'
 import MyMatchList from './src/screen/WeeklyTest/MyMatch/MyMatchList'
+import MyEvents from './src/screen/EventsScreen/MyEvent/MyEvents'
 
 
 
@@ -58,6 +59,7 @@ const App = () => {
     {/* <SellFranchise/> */}
     {/* <WeeklyTest/> */}
     {/* <ListofStudent/> */}
+    {/* <MyEvents/> */}
     {/* <MyMatchList/> */}
         {/* <MoreEvent/> */}
      {/* <EventsScreen/> */}
