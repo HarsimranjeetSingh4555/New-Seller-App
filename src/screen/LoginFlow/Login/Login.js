@@ -49,9 +49,9 @@ const Login = ({ navigation }) => {
                     </View>
 
                     <TouchableOpacity onPress={() => navigation.navigate('VerifyCode')} style={styles.Btn}>
-                        <View >
+                        
                             <Text style={styles.btn}> Submit </Text>
-                        </View>
+                        
                     </TouchableOpacity>
                     {/* <View style={styles.SMS}>
                         <Text style={styles.smstext}>Not a member?</Text>

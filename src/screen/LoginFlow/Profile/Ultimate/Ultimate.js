@@ -95,11 +95,9 @@ const Ultimate = ({navigation}) => {
                     </View>
                 </View>
                 
-                
-
-
                <View>
-            <TouchableOpacity style={styles.btnsubmit} onPress={() => navigation.navigate('PaymentGateWay')}  style={styles.Btn}>
+
+            <TouchableOpacity  onPress={() => navigation.navigate('PaymentGateWay')}  style={styles.Btn}>
               <Text style={styles.btn}>Buy Now</Text>
             </TouchableOpacity>
           </View>

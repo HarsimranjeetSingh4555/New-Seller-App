@@ -1,7 +1,28 @@
-import { StyleSheet, ScrollView, number, Text, View, TouchableOpacity, Image, TextInput, TouchableHighlight,StatusBar } from 'react-native'
-import React from 'react'
+import { StyleSheet, ScrollView, ImageBackground, Text, View, TouchableOpacity, Image, TextInput,StatusBar } from 'react-native'
+import React,{useState} from 'react'
+import CustomTextInput from '../../../Component/CustomTextInput/CustomTextInput'
+
 
 const Aboutus = ({navigation}) => {
+
+   const [about,setAbout] =useState()
+   const [our,setOur] =useState()
+
+   const [imagefront, setImagefront] = useState('https://www.whatsappimages.in/wp-content/uploads/2022/03/Black-Wallpaper-Download-Free.jpg');
+   const [showoption, setShowoption] = useState(false)
+
+   const openGalleryFront = () => {
+      ImageCropPicker.openPicker({
+         width: 100,
+         height: 100,
+         cropping: false
+      }).then(imagefront => {
+         console.log(imagefront);
+         setShowoption(false)
+         setImagefront(imagefront.path)
+      });
+   }
+
   return (
     <>      
        <StatusBar
@@ -19,50 +40,41 @@ const Aboutus = ({navigation}) => {
                </View>
             </View>
 
-           <View style={{alignSelf:'center',marginVertical:10}}>
-           <View  style={styles.borderdelete}>
-                  <TouchableOpacity>
-                  <View>
-                    <Image source={require('../Profile/assets/delete.png')} style={styles.delete}/>
-                  </View>
+            <View style={{ alignSelf: 'center', marginVertical: 10 }}>
+
+                  <TouchableOpacity style={styles.borderdelete}>
+                     <View>
+                        <Image source={require('../CreateProfile/assets/delete.png')} style={styles.delete} />
+                     </View>
                   </TouchableOpacity>
-              </View>
-              <View  style={styles.border}>
-                  <TouchableOpacity>
+
+
                   <View>
-                    <Image source={require('../Profile/assets/Camera.png')} style={styles.camera}/>
+                     <View style={styles.border}>
+                        <TouchableOpacity onPress={() => openGalleryFront()}>
+                           <View>
+                              <Image source={require('../CreateProfile/assets/Camerab.png')} style={styles.camera} />
+                           </View>
+                        </TouchableOpacity>
+                     </View>
+                     <View>
+
+                        <ImageBackground source={{ uri: imagefront }} style={styles.dp} />
+
+                     </View>
                   </View>
-                  </TouchableOpacity>
-              </View>
-               <View>
-                <TouchableOpacity>
-                     <Image source={require('../Profile/assets/dp.png')} style={styles.dp}/> 
-                </TouchableOpacity>
+
                </View>
-           </View>
 
-            <View style={styles.Input}>
-             <View style={{flexDirection:'row'}}>
-               <Image source={require('../Aboutus/assets/about.png')} style={styles.camera}/>
-               <Text style={{color:'#000',fontWeight:'600',fontSize:16,marginTop:5,marginHorizontal:10}}> About us</Text>
-             </View>
-               <TextInput placeholder='' keyboardType='' style={styles.input} /> 
-            </View>
-
-             <View style={styles.Input}>
-             <View style={{flexDirection:'row'}}>
-               <Image source={require('../Aboutus/assets/our.png')} style={styles.camera}/>
-               <Text style={{color:'#000',fontWeight:'600',fontSize:16,marginTop:5,marginHorizontal:10}}> Our Specialization</Text>
-             </View>
-               <TextInput placeholder='' keyboardType='' style={styles.input} /> 
-            </View>           
+               <CustomTextInput label={'About us'} value={about} setValue={setAbout} />
+               <CustomTextInput label={'Our Specialization'} value={our} setValue={setOur} />
 
 
-            <View style={styles.Btn}>
-               <TouchableOpacity onPress={() => navigation.navigate('MyMatch')}>
-                  <Text style={styles.btn}> Submit </Text>
+           
+               <TouchableOpacity onPress={() => navigation.navigate('MyMatch')} style={styles.Btn}>
+                  <Text style={styles.btn}>Submit</Text>
                </TouchableOpacity>
-            </View>
+            
 
 
          </View>
@@ -74,72 +86,60 @@ const Aboutus = ({navigation}) => {
 export default Aboutus
 
 const styles = StyleSheet.create({
-    logo: {
-        width:300,
-        height:160,
-        alignSelf: 'center',
-        marginTop: 30
-    },
-    wel: {
-     marginVertical: 20,
-     textAlign: 'center',
-     fontSize: 25,
-     color: '#000000',
-     fontWeight: '600'
-  },
-   dp:{
-       marginTop:10,
-        width:120,
-        height:120, 
-     },
-     border:{
-        padding:4,
-        marginLeft:95,
-        position:'absolute',
-        zIndex:1,
-        marginTop:99
-     },
-     camera:{
-        width:34,
-        height:34,
-        marginLeft:1,
-     },
-     borderdelete:{
-        marginLeft:90,
-        position:'absolute',
-        zIndex:1,
-     },
-     delete:{
-        width:50,
-        height:50,
-        marginLeft:1,
-     },
-    
-     Input: {
-        marginHorizontal: 20,
-        marginTop:10,
-        borderWidth:1,
-        padding:10,
-        borderRadius:10
-     },
-     input: {
-       marginBottom:10,
-        color:'#969696',
-        fontSize:17,
-        fontWeight:'600',
-        borderBottomWidth:1
-     },
-     Btn: {
-        alignItems: 'center',
-       marginVertical:20,
-     },
-     btn: {
-        backgroundColor: '#0006C1',
-        paddingHorizontal: 100,
-        paddingVertical: 15,
-        color: '#FFFFFF',
-        fontSize: 25,
-        borderRadius: 15,
-        fontWeight: "600"
-     },
+   logo: {
+      width: '70%',
+      height: 160,
+      alignSelf: 'center',
+      marginTop: '10%'
+   },
+   wel: {
+      marginVertical: 20,
+      textAlign: 'center',
+      fontSize: 25,
+      color: '#000000',
+      fontWeight: '600'
+   },
+   dp: {
+      overflow: 'hidden',
+      marginTop: 10,
+      width: 140,
+      height: 140,
+      borderRadius: 10
+   },
+   border: {
+      padding: 4,
+      marginLeft: '78%',
+      position: 'absolute',
+      zIndex: 1,
+      marginTop: "85%",
+   },
+   camera: {
+      width: 34,
+      height: 34,
+      marginLeft: 1,
+   },
+   borderdelete: {
+      marginLeft: '26%',
+      position: 'absolute',
+      zIndex: 1,
+   },
+   delete: {
+      width: 50,
+      height: 50,
+      marginLeft: 1,
+   },
+
+   Btn: {
+      alignItems: 'center',
+      marginVertical: 20,
+   },
+   btn: {
+      backgroundColor: '#0006C1',
+      paddingHorizontal: 100,
+      paddingVertical: 15,
+      color: '#FFFFFF',
+      fontSize: 25,
+      borderRadius: 15,
+      fontWeight: "600"
+   },
 })

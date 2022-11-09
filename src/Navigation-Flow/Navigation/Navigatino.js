@@ -15,6 +15,7 @@ import Certificate from '../../screen/LoginFlow/Profile/Certificate/Certifacate'
 import Result from '../../screen/LoginFlow/Profile/Result/Result';
 import Review from '../../screen/LoginFlow/Profile/Review/Review';
 import BuyPlan from '../../screen/LoginFlow/Profile/BuyPlan/BuyPlan';
+import AllPlanList from '../../screen/LoginFlow/Profile/AllPlanList/AllPlanList';
 import Profenssional from '../../screen/LoginFlow/Profile/Profenssional/Profenssional';
 import Business from '../../screen/LoginFlow/Profile/Business/Business';
 import Ultimate from '../../screen/LoginFlow/Profile/Ultimate/Ultimate';
@@ -104,6 +105,7 @@ const Navigatino = () => {
         <Stack.Screen name="Result" component={Result} />
         <Stack.Screen name="Review" component={Review} />
         <Stack.Screen name="BuyPlan" component={BuyPlan} />
+        <Stack.Screen name="AllPlanList" component={AllPlanList} />
         <Stack.Screen name="Profenssional" component={Profenssional} />
         <Stack.Screen name="Business" component={Business} />
         <Stack.Screen name="Ultimate" component={Ultimate} />

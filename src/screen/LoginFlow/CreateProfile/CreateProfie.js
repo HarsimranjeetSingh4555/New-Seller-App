@@ -1,35 +1,45 @@
-import { StyleSheet, ScrollView, number, Text, View, TouchableOpacity, Image, TextInput, TouchableHighlight, StatusBar } from 'react-native'
+import { StyleSheet, ScrollView, number, Text, View, TouchableOpacity, Image, TextInput, ImageBackground, TouchableHighlight, StatusBar } from 'react-native'
 import React, { useState } from 'react'
-// import ImageCropPicker from 'react-native-image-crop-picker';
+import ImageCropPicker from 'react-native-image-crop-picker';
+import CustomTextInput from '../../../Component/CustomTextInput/CustomTextInput'
+
 
 const CreateProfie = ({ navigation }) => {
 
-   // const [imagefront, setImagefront] = useState('https://www.whatsappimages.in/wp-content/uploads/2022/03/Black-Wallpaper-Download-Free.jpg');
-   // const [showoption, setShowoption] = useState(false)
+   const [first_name, setFirst_name] = useState()
+   const [adress, setAdress] = useState()
+   const [district, setDistrict] = useState()
+   const [state, setState] = useState()
+   const [email, setEmail] = useState()
+   const [web, setWeb] = useState()
+   const [phone, setPhone] = useState()
+
+   const [imagefront, setImagefront] = useState('https://www.whatsappimages.in/wp-content/uploads/2022/03/Black-Wallpaper-Download-Free.jpg');
+   const [showoption, setShowoption] = useState(false)
 
 
 
    // const [idproof, setIdproof] = useState('')
 
-   //   ImageCropPicker.openCamera({
+   // ImageCropPicker.openCamera({
    //    width: 300,
    //    height: 400,
    //    cropping: true,
-   //  }).then(image => {
-   //    console.log(image);
-   //  });
+   // }).then(imagefront => {
+   //    console.log(imagefront);
+   // });
 
-   // const openGalleryFront = () => {
-   //    ImageCropPicker.openPicker({
-   //       width: 100,
-   //       height: 100,
-   //       cropping: false
-   //    }).then(imagefront => {
-   //       console.log(imagefront);
-   //       setShowoption(false)
-   //       setImagefront(imagefront.path)
-   //    });
-   // }
+   const openGalleryFront = () => {
+      ImageCropPicker.openPicker({
+         width: 100,
+         height: 100,
+         cropping: false
+      }).then(imagefront => {
+         console.log(imagefront);
+         setShowoption(false)
+         setImagefront(imagefront.path)
+      });
+   }
 
 
    return (
@@ -45,83 +55,52 @@ const CreateProfie = ({ navigation }) => {
                      <Image source={require('../../LoginFlow/assets/logo.png')} style={styles.logo} />
                   </View>
                   <View>
-                     <Text style={styles.wel}> Let's create your profile</Text>
+                     <Text style={styles.wel}> Let's create company profile</Text>
                   </View>
                </View>
 
                <View style={{ alignSelf: 'center', marginVertical: 10 }}>
-                  <View style={styles.borderdelete}>
-                     <TouchableOpacity>
-                        <View>
-                           <Image source={require('../CreateProfile/assets/delete.png')} style={styles.delete} />
-                        </View>
-                     </TouchableOpacity>
-                  </View>
+
+                  <TouchableOpacity style={styles.borderdelete}>
+                     <View>
+                        <Image source={require('../CreateProfile/assets/delete.png')} style={styles.delete} />
+                     </View>
+                  </TouchableOpacity>
+
 
                   <View>
-                     <View style={styles.border}>
-                        <TouchableOpacity >
-                           <View>
-                              <Image source={require('../CreateProfile/assets/Camerab.png')} style={styles.camera} />
-                           </View>
-                        </TouchableOpacity>
-                     </View>
-                     {/* <View>
+
+                     <TouchableOpacity onPress={() => openGalleryFront()} style={styles.border}>
+                        <View>
+                           <Image source={require('../CreateProfile/assets/Camerab.png')} style={styles.camera} />
+                        </View>
+                     </TouchableOpacity>
+
+                     <View>
 
                         <ImageBackground source={{ uri: imagefront }} style={styles.dp} />
 
-                     </View> */}
-                  </View>
-
-                  <View>
-                     <TouchableOpacity>
-                        <Image source={require('../CreateProfile/assets/dp.png')} style={styles.dp} />
-                     </TouchableOpacity>
-                  </View>
-               </View>
-
-               <View style={styles.Input}>
-                  <Text style={{ color: '#626262', fontWeight: '600', fontSize: 16 }}>Company Name</Text>
-                  <TextInput placeholder='' keyboardType='' style={styles.input} />
-               </View>
-
-               <View style={styles.Input}>
-                  <Text style={{ color: '#626262', fontWeight: '600', fontSize: 16 }}>Company's Address </Text>
-                  <TextInput placeholder='' keyboardType='' style={styles.input} />
-               </View>
-
-               <View style={styles.Input}>
-                  <Text style={{ color: '#626262', fontWeight: '600', fontSize: 16 }}> District Name </Text>
-                  <TextInput placeholder='' keyboardType='' style={styles.input} />
-               </View>
-
-               <View style={styles.Input}>
-                  <Text style={{ color: '#626262', fontWeight: '600', fontSize: 16 }}> State Name </Text>
-                  <TextInput placeholder='' keyboardType='' style={styles.input} />
-               </View>
-
-               <View style={styles.Input}>
-                  <Text style={{ color: '#626262', fontWeight: '600', fontSize: 16 }}> E-Mail ID </Text>
-                  <TextInput placeholder='' keyboardType='' style={styles.input} />
-               </View>
-
-               <View style={styles.Input}>
-                  <Text style={{ color: '#626262', fontWeight: '600', fontSize: 16 }}> Website </Text>
-                  <TextInput placeholder='' keyboardType='' style={styles.input} />
-               </View>
-
-               <View style={styles.Input}>
-                  <Text style={{ color: '#626262', fontWeight: '600', fontSize: 16 }}> Login Phone No. </Text>
-                  <TextInput placeholder='' keyboardType='' style={styles.input} />
-               </View>
-
-              
-                  <TouchableOpacity onPress={() => navigation.navigate('Profile')} style={styles.Btn}>
-                  <View >
-                     <Text style={styles.btn}> Submit </Text>
                      </View>
-                  </TouchableOpacity>
-              
+                  </View>
+
+               </View>
+
+
+               <CustomTextInput label={'Company Name'} value={first_name} setValue={setFirst_name} />
+               <CustomTextInput label={'Company Adress'} value={adress} setValue={setAdress} />
+               <CustomTextInput label={'District Name'} value={district} setValue={setDistrict} />
+               <CustomTextInput label={'State Name'} value={state} setValue={setState} />
+               <CustomTextInput label={'Email-ID'} value={email} setValue={setEmail} />
+               <CustomTextInput label={'WebSite'} value={web} setValue={setWeb} />
+               <CustomTextInput label={'Login Phone no.'} value={phone} setValue={setPhone} />
+
+
+
+
+               <TouchableOpacity onPress={() => navigation.navigate('Profile')} style={styles.Btn}>
+                     <Text style={styles.btn}> Submit </Text>
+               </TouchableOpacity>
+
 
 
             </View>
@@ -148,16 +127,18 @@ const styles = StyleSheet.create({
       fontWeight: '600'
    },
    dp: {
+      overflow: 'hidden',
       marginTop: 10,
-      width: 120,
-      height: 120,
+      width: 140,
+      height: 140,
+      borderRadius: 10
    },
    border: {
       padding: 4,
-      marginLeft: 95,
+      marginLeft: '78%',
       position: 'absolute',
       zIndex: 1,
-      marginTop: 99
+      marginTop: "85%",
    },
    camera: {
       width: 34,
@@ -165,7 +146,7 @@ const styles = StyleSheet.create({
       marginLeft: 1,
    },
    borderdelete: {
-      marginLeft: 90,
+      marginLeft: '26%',
       position: 'absolute',
       zIndex: 1,
    },
@@ -175,20 +156,6 @@ const styles = StyleSheet.create({
       marginLeft: 1,
    },
 
-   Input: {
-      marginHorizontal: 20,
-      marginTop: 10,
-      borderWidth: 1,
-      padding: 10,
-      borderRadius: 10
-   },
-   input: {
-      marginBottom: 10,
-      color: '#969696',
-      fontSize: 17,
-      fontWeight: '600',
-      borderBottomWidth: 1
-   },
    Btn: {
       alignItems: 'center',
       marginVertical: 20,

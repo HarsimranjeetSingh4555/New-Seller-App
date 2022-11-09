@@ -63,10 +63,8 @@ const BuyPlan = ({navigation}) => {
                      <Text style={styles.or}>OR</Text>
                   </View>
            
-                  <TouchableOpacity  onPress={() => navigation.navigate('Profenssional')} style={styles.Btn}>
-                  <View >
+                  <TouchableOpacity  onPress={() => navigation.navigate('AllPlanList')} style={styles.Btn}>
                      <Text style={styles.btn}> Upgrade Plan</Text>
-                     </View>
                   </TouchableOpacity>
                
 
@@ -155,7 +153,7 @@ const styles = StyleSheet.create({
       fontWeight:'500',
       fontSize:20,
       textAlign:'center',
-      marginVertical:50,
+      marginVertical:20,
       color:'#000'
    },
    Btn: {

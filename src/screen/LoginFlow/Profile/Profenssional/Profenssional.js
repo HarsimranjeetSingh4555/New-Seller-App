@@ -133,8 +133,7 @@ const Profenssional = ({navigation}) => {
                     </View>
                     <View style={{flexDirection:'row'}}>
                         <Text style={{fontSize:50,marginTop:-35,marginLeft:5,color:'#0006C1'}}>.</Text>
-                        <Text style={styles.Text2}>Discount 10% off on promosational{'\n'}Events stall
-                          </Text>
+                        <Text style={styles.Text2}>Discount 10% off on promosational{'\n'}Events stall</Text>
                     </View>
                     <View style={{flexDirection:'row'}}>
                         <Text style={{fontSize:50,marginTop:-35,marginLeft:5,color:'#0006C1'}}>.</Text>
@@ -146,11 +145,11 @@ const Profenssional = ({navigation}) => {
                     </View>
                 </View>
 
-               <View >
-            <TouchableOpacity style={styles.btnsubmit} onPress={() => navigation.navigate('Business')} style={styles.Btn}>
+               
+            <TouchableOpacity style={styles.Btn} onPress={() => navigation.navigate('Business')} >
               <Text style={styles.btn}>Buy Now</Text>
             </TouchableOpacity>
-          </View>
+         
 
             </View>
          </ScrollView>
@@ -190,7 +189,6 @@ const styles = StyleSheet.create({
         margin:5,
         fontWeight:'500',
         fontSize:15,
-        
         color:'#0006C1'
     },
     Text3:{

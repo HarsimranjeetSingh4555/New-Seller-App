@@ -117,7 +117,7 @@ const Business = ({navigation}) => {
 
 
               
-            <TouchableOpacity style={styles.btnsubmit} onPress={() => navigation.navigate('Ultimate')} style={styles.Btn}>
+            <TouchableOpacity style={styles.Btn} onPress={() => navigation.navigate('Ultimate')} >
             <View >
               <Text style={styles.btn}>Buy Now</Text>
               </View>
@@ -171,24 +171,11 @@ Text3:{
    margin:5,
    // color:'#0006C1'
 },
-   // border: {
-   //    padding: 4,
-   //    marginLeft: 95,
-   //    position: 'absolute',
-   //    zIndex: 1,
-   //    marginTop: 99
-   // },
    camera: {
       width: 34,
       height: 34,
       marginLeft: 1,
    },
-   // border:{
-   //    width:120,
-   //    height:120,
-   //    borderWidth:1,
-   // },
-
    Input: {
       marginHorizontal: 14,
       marginTop: 20,
