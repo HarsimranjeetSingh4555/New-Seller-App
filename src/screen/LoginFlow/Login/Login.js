@@ -1,10 +1,40 @@
 import { StyleSheet, ScrollView, number, Text, View, TouchableOpacity, Image, StatusBar } from 'react-native'
-import React from 'react';
+import React,{useState} from 'react';
 import PhoneInput from 'react-native-phone-number-input';
 
 
 
 const Login = ({ navigation }) => {
+
+    const [phone_number, setPhone_number] = useState("");
+     console.log(phone_number, "number is here")
+
+    function login(){        
+        if (!(phone_number && phone_number.length > 9)) {
+            alert('Enter your number')
+            return
+         }
+
+        let data={phone_number}
+        fetch("http://douryou.herokuapp.com/douryou-seller-api/seller-send-otp/",{
+            method:"POST",
+            headers:{
+                'Accept':'application/json',
+                'Content-Type':'application/json',
+            },
+            body:JSON.stringify(data)
+        }).then((result)=>{
+                result.json().then((resp)=>{
+                    console.log(resp,"12345566566")
+                     navigation.navigate('VerifyCode',{
+                        phone_number
+                     });
+                }) .catch((error) => {
+                    console.log(error);
+                  });
+        })       
+    }
+
     return (
         <>
             <StatusBar
@@ -26,7 +56,7 @@ const Login = ({ navigation }) => {
 
                     <View style={styles.PhoneInput}>
                         <PhoneInput
-                            defaultValue={number}
+                            defaultValue={phone_number}
                             defaultCode='IN'
                             containerStyle={{
                                 height: 60,
@@ -41,6 +71,9 @@ const Login = ({ navigation }) => {
                                 paddingBottom: -10,
                                 borderRadius: 10
                             }}
+                            onChangeFormattedText={(text) => {
+                                setPhone_number(text)
+                            }}
                         />
 
                     </View>
@@ -48,14 +81,12 @@ const Login = ({ navigation }) => {
                         <Text style={styles.smstext}> Carrier SMS charges may apply</Text>
                     </View>
 
-                    <TouchableOpacity onPress={() => navigation.navigate('VerifyCode')} style={styles.Btn}>
+                    {/* <TouchableOpacity onPress={() => navigation.navigate('VerifyCode')} style={styles.Btn}> */}
+                    <TouchableOpacity onPress={() =>{login()}} style={styles.Btn}>
                         
                             <Text style={styles.btn}> Submit </Text>
                         
                     </TouchableOpacity>
-                    {/* <View style={styles.SMS}>
-                        <Text style={styles.smstext}>Not a member?</Text>
-                    </View> */}
 
                 </View>
             </ScrollView>

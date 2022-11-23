@@ -1,4 +1,4 @@
-import { StyleSheet, ScrollView, number, Text, View, TouchableOpacity, Image, TextInput, TouchableHighlight, StatusBar } from 'react-native'
+import { StyleSheet, ScrollView, Dimensions, Text, View, TouchableOpacity, Image, StatusBar } from 'react-native'
 import React from 'react'
 
 const Business = ({navigation}) => {
@@ -141,12 +141,12 @@ const styles = StyleSheet.create({
   },
   dot:{
    fontSize:50,
-   marginTop:-35,
+   marginTop:-30,
    marginLeft:5
 },
 dot2:{
    fontSize:50,
-   marginTop:-35,
+   marginTop:-30,
    marginLeft:5,
    color:'#0006C1'
 },
@@ -155,14 +155,17 @@ dot2:{
    fontWeight:'500',
    fontSize:13,
    margin:5,
-   color:'#000'
+   color:'#000',
+   width:Dimensions.get('window').width /1.2
+
 },
 Text2:{
    // marginTop:5,
    fontWeight:'500',
    fontSize:15,
    margin:5,
-   color:'#0006C1'
+   color:'#0006C1',
+   width:Dimensions.get('window').width /1.3
 },
 Text3:{
    // marginTop:5,
@@ -193,11 +196,11 @@ Text3:{
       padding:2
      },
      Border2:{
-      marginTop:20,
+      marginTop:15,
       borderWidth:1,
       marginHorizontal:14,
       borderRadius:10,
-      height:130,
+      height:'auto',
       padding:2
      },
   

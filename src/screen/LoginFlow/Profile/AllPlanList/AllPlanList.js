@@ -200,12 +200,13 @@ const styles = StyleSheet.create({
         fontWeight: '600'
     },
     border: {
-        borderWidth: 1,
+        borderWidth: 2,
+        borderColor:'#0006C1',
         height: 'auto',
         width: '96%',
         alignSelf: 'center',
         borderRadius: 10,
-        marginBottom: 20
+        marginBottom: 20,
     },
     Top: {
         flexDirection: 'row',

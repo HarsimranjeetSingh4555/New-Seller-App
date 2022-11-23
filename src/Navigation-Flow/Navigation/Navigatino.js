@@ -62,6 +62,8 @@ import EventSecond from '../../screen/EventsScreen/EventSecond';
 import PaymentGateWay from '../../screen/EventsScreen/PaymentGateWay/PaymentGateWay';
 import ProfileDetails from '../../screen/ProfileDetails/ProfileDetails'
 import MyMatchList from '../../screen/WeeklyTest/MyMatch/MyMatchList';
+import Jsonfile from '../../screen/LoginFlow/Profile/JsonData/JsonData';
+import Checks from '../../Checks/Checks';
 
 
 
@@ -159,6 +161,8 @@ const Navigatino = () => {
         <Stack.Screen name="WeeklyTest" component={WeeklyTest} />
         <Stack.Screen name="ListofStudent" component={ListofStudent} />
         <Stack.Screen name="MyMatchList" component={MyMatchList} />
+        <Stack.Screen name="Jsonfile" component={Jsonfile} />
+        <Stack.Screen name="Checks" component={Checks} />
 
         
 

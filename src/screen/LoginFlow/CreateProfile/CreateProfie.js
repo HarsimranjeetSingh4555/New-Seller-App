@@ -6,15 +6,16 @@ import CustomTextInput from '../../../Component/CustomTextInput/CustomTextInput'
 
 const CreateProfie = ({ navigation }) => {
 
-   const [first_name, setFirst_name] = useState()
-   const [adress, setAdress] = useState()
-   const [district, setDistrict] = useState()
-   const [state, setState] = useState()
-   const [email, setEmail] = useState()
-   const [web, setWeb] = useState()
-   const [phone, setPhone] = useState()
+   const [CompanyName, setCompanyName] = useState()
+   const [CompanyAddress, setCompanyAddress] = useState()
+   const [CompanyDistrictName, setCompanyDistrictName] = useState()
+   const [CompanyStateName, setCompanyStateName] = useState()
+   const [CompanyEmailID, setCompanyEmailID] = useState()
+   const [CompanyWebsiteLink, setCompanyWebsiteLink] = useState()
+   const [CompanyLoginPhoneNo, setCompanyLoginPhoneNo] = useState()
+   const [accessToken, setAccess] = useState(null);
 
-   const [imagefront, setImagefront] = useState('https://www.whatsappimages.in/wp-content/uploads/2022/03/Black-Wallpaper-Download-Free.jpg');
+   const [CompanyLogo, setCompanyLogo] = useState('https://www.whatsappimages.in/wp-content/uploads/2022/03/Black-Wallpaper-Download-Free.jpg');
    const [showoption, setShowoption] = useState(false)
 
 
@@ -31,16 +32,62 @@ const CreateProfie = ({ navigation }) => {
 
    const openGalleryFront = () => {
       ImageCropPicker.openPicker({
+
          width: 100,
          height: 100,
          cropping: false
-      }).then(imagefront => {
-         console.log(imagefront);
+      }).then(CompanyLogo => {
+         console.log(CompanyLogo);
          setShowoption(false)
-         setImagefront(imagefront.path)
+         setCompanyLogo(CompanyLogo.path)
       });
    }
 
+
+   function SaveData() {
+
+      let accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcwMDU5MDU3LCJpYXQiOjE2NjkxOTUwNTcsImp0aSI6IjhmZWEwNGIxMjA2YzQyZmFiZTNlZTFhZGFlZWJhZDU1IiwidXNlcl9pZCI6MjV9.5ZaAfjz75KxYt7TFnosxRUBv_fuWhe0QcYIAz6CZ9xQ"
+      setAccess(accessToken)
+
+      let formData = new FormData();
+      let filename = CompanyLogo.split('/').pop();
+      console.log("filename = " + filename);
+      let match = /\.(\w+)$/.exec(filename);
+      console.log("match = " + match);
+      let type = match ? `image/${match[1]}` : `image`;
+      console.log("type = " + type);
+      formData.append('CompanyName', CompanyName)
+      formData.append('CompanyAddress', CompanyAddress)
+      formData.append('CompanyDistrictName', CompanyDistrictName)
+      formData.append('CompanyLogo', { uri: CompanyLogo, name: filename, type })
+      formData.append('CompanyStateName', CompanyStateName)
+      formData.append('CompanyEmailID', CompanyEmailID)
+      formData.append('CompanyWebsiteLink', CompanyWebsiteLink)
+      formData.append('CompanyLoginPhoneNo', CompanyLoginPhoneNo)
+      formData.append("is_active", true)
+      formData.append("is_user", true)
+
+
+
+
+      fetch('https://douryou.herokuapp.com/douryou-seller-api/seller-registration/', {
+         method: 'Post',
+         headers: {
+            "Accept": "application/json",
+            "Content-Type": "multipart/form-data",
+            'Authorization': 'Bearer ' + accessToken,
+         },
+         body: formData
+      }).then((result) => {
+         result.json().then((response) => {
+            console.log(response, "Response");
+            navigation.navigate('Profile')
+            alert("DATA SAVE")
+         }).catch((error) => {
+            console.log(error);
+         });
+      })
+   }
 
    return (
       <>
@@ -62,23 +109,18 @@ const CreateProfie = ({ navigation }) => {
                <View style={{ alignSelf: 'center', marginVertical: 10 }}>
 
                   <TouchableOpacity style={styles.borderdelete}>
-                     <View>
-                        <Image source={require('../CreateProfile/assets/delete.png')} style={styles.delete} />
-                     </View>
+                     <Image source={require('../CreateProfile/assets/delete.png')} style={styles.delete} />
                   </TouchableOpacity>
-
 
                   <View>
 
                      <TouchableOpacity onPress={() => openGalleryFront()} style={styles.border}>
-                        <View>
-                           <Image source={require('../CreateProfile/assets/Camerab.png')} style={styles.camera} />
-                        </View>
+                        <Image source={require('../CreateProfile/assets/Camerab.png')} style={styles.camera} />
                      </TouchableOpacity>
 
                      <View>
 
-                        <ImageBackground source={{ uri: imagefront }} style={styles.dp} />
+                        <ImageBackground source={{ uri: CompanyLogo }} style={styles.dp} />
 
                      </View>
                   </View>
@@ -86,19 +128,20 @@ const CreateProfie = ({ navigation }) => {
                </View>
 
 
-               <CustomTextInput label={'Company Name'} value={first_name} setValue={setFirst_name} />
-               <CustomTextInput label={'Company Adress'} value={adress} setValue={setAdress} />
-               <CustomTextInput label={'District Name'} value={district} setValue={setDistrict} />
-               <CustomTextInput label={'State Name'} value={state} setValue={setState} />
-               <CustomTextInput label={'Email-ID'} value={email} setValue={setEmail} />
-               <CustomTextInput label={'WebSite'} value={web} setValue={setWeb} />
-               <CustomTextInput label={'Login Phone no.'} value={phone} setValue={setPhone} />
+               <CustomTextInput label={'Company Name'} value={CompanyName} setValue={setCompanyName} />
+               <CustomTextInput label={'Company Adress'} value={CompanyAddress} setValue={setCompanyAddress} />
+               <CustomTextInput label={'District Name'} value={CompanyDistrictName} setValue={setCompanyDistrictName} />
+               <CustomTextInput label={'State Name'} value={CompanyStateName} setValue={setCompanyStateName} />
+               <CustomTextInput label={'Email-ID'} value={CompanyEmailID} setValue={setCompanyEmailID} />
+               <CustomTextInput label={'WebSite'} value={CompanyWebsiteLink} setValue={setCompanyWebsiteLink} />
+               <CustomTextInput label={'Login Phone no.'} value={CompanyLoginPhoneNo} setValue={setCompanyLoginPhoneNo} />
 
 
 
 
-               <TouchableOpacity onPress={() => navigation.navigate('Profile')} style={styles.Btn}>
-                     <Text style={styles.btn}> Submit </Text>
+               {/* <TouchableOpacity onPress={() => navigation.navigate('Profile')} style={styles.Btn}> */}
+               <TouchableOpacity onPress={SaveData} style={styles.Btn}>
+                  <Text style={styles.btn}> Submit </Text>
                </TouchableOpacity>
 
 

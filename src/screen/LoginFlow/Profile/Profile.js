@@ -1,14 +1,16 @@
 import { StyleSheet, ScrollView, number, Text, View, TouchableOpacity, Image, TextInput, ImageBackground, StatusBar } from 'react-native'
 import React, { useState } from 'react'
+import ImageCropPicker from 'react-native-image-crop-picker'
 import CustomTextInput from '../../../Component/CustomTextInput/CustomTextInput'
 
 const Profile = ({ navigation }) => {
 
-   const [name, setName] = useState()
-   const [number, setNumber] = useState()
-   const [desigation, setDesigation] = useState()
+   const [ContactPersonName, setContactPersonName] = useState()
+   const [ContactPersonNumber, setContactPersonNumber] = useState()
+   const [ContactPersonDesigation, setContactPersonDesigation] = useState()
+   const [accessToken, setAccess] = useState(null);
 
-   const [imagefront, setImagefront] = useState('https://www.whatsappimages.in/wp-content/uploads/2022/03/Black-Wallpaper-Download-Free.jpg');
+   const [ContactPersonPic, setContactPersonPic] = useState('https://www.whatsappimages.in/wp-content/uploads/2022/03/Black-Wallpaper-Download-Free.jpg');
    const [showoption, setShowoption] = useState(false)
 
    const openGalleryFront = () => {
@@ -16,11 +18,50 @@ const Profile = ({ navigation }) => {
          width: 100,
          height: 100,
          cropping: false
-      }).then(imagefront => {
-         console.log(imagefront);
+      }).then(ContactPersonPic => {
+         console.log(ContactPersonPic);
          setShowoption(false)
-         setImagefront(imagefront.path)
+         setContactPersonPic(ContactPersonPic.path)
       });
+   }
+
+   
+   function SaveData() {
+
+      let accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcwMDU5MDU3LCJpYXQiOjE2NjkxOTUwNTcsImp0aSI6IjhmZWEwNGIxMjA2YzQyZmFiZTNlZTFhZGFlZWJhZDU1IiwidXNlcl9pZCI6MjV9.5ZaAfjz75KxYt7TFnosxRUBv_fuWhe0QcYIAz6CZ9xQ"
+      setAccess(accessToken)
+
+      let formData = new FormData();
+      let filename = ContactPersonPic.split('/').pop();
+      console.log("filename = " + filename);
+      let match = /\.(\w+)$/.exec(filename);
+      console.log("match = " + match);
+      let type = match ? `image/${match[1]}` : `image`;
+      console.log("type = " + type);
+      formData.append('ContactPersonName', ContactPersonName)
+      formData.append('ContactPersonNumber', ContactPersonNumber)
+      formData.append('ContactPersonDesigation', ContactPersonDesigation)
+      formData.append('ContactPersonPic', { uri: ContactPersonPic, name: filename, type })
+      formData.append("is_active", true)
+      formData.append("is_user", true)
+
+      fetch('https://douryou.herokuapp.com/douryou-seller-api/seller-registration/', {
+         method: 'Patch',
+         headers: {
+            "Accept": "application/json",
+            "Content-Type": "multipart/form-data",
+            'Authorization': 'Bearer ' + accessToken,
+         },
+         body: formData
+      }).then((result) => {
+         result.json().then((response) => {
+            console.log(response, "Response");
+            navigation.navigate('Aboutus')
+            alert("DATA SAVE")
+         }).catch((error) => {
+            console.log(error);
+         });
+      })
    }
 
    return (
@@ -59,7 +100,7 @@ const Profile = ({ navigation }) => {
                      </View>
                      <View>
 
-                        <ImageBackground source={{ uri: imagefront }} style={styles.dp} />
+                        <ImageBackground source={{ uri: ContactPersonPic }} style={styles.dp} />
 
                      </View>
                   </View>
@@ -68,14 +109,15 @@ const Profile = ({ navigation }) => {
 
 
 
-               <CustomTextInput label={'Contact Person Name'} value={name} setValue={setName} />
-               <CustomTextInput label={'Contact Number'} value={number} setValue={setNumber} />
-               <CustomTextInput label={'Contact Persons Desigation'} value={desigation} setValue={setDesigation} />
+               <CustomTextInput label={'Contact Person Name'} value={ContactPersonName} setValue={setContactPersonName} />
+               <CustomTextInput label={'Contact Number'} value={ContactPersonNumber} setValue={setContactPersonNumber} />
+               <CustomTextInput label={'Contact Persons Desigation'} value={ContactPersonDesigation} setValue={setContactPersonDesigation} />
 
 
 
 
-               <TouchableOpacity onPress={() => navigation.navigate('Aboutus')} style={styles.Btn}>
+               {/* <TouchableOpacity onPress={() => navigation.navigate('Aboutus')} style={styles.Btn}> */}
+               <TouchableOpacity onPress={SaveData} style={styles.Btn}>
                   <Text style={styles.btn}> Submit </Text>
                </TouchableOpacity>
 
